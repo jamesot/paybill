@@ -95,10 +95,14 @@
         <activity
             android:name=".Activities.ContactUs"
             android:label="@string/title_activity_contact_us"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SaveHomeAd"
             android:label="Change Home Advertisement"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.UploadNoticeBoard"
+            android:label="@string/title_activity_notice_board"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

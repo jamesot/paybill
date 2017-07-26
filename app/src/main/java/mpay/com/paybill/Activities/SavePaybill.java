@@ -81,7 +81,7 @@ public class SavePaybill extends AppCompatActivity {
     EditText description;
     @Bind(R.id.buttonChooseVideo)
     Button buttonChooseVideo;
-
+    boolean tru;
     private static final int SELECT_VIDEO = 3;
 
     private String selectedPath;
@@ -92,12 +92,14 @@ public class SavePaybill extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST = 1;
 
     private String UPLOAD_URL = MyShortcuts.baseURL() + "upload.php";
+    private String UPLOAD_URL_P = MyShortcuts.baseURL() + "UploadPaybill.php";
 
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "name";
     private String type = "  Paybill Number  ";
     ProgressDialog uploading;
     ProgressDialog loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,10 +122,10 @@ public class SavePaybill extends AppCompatActivity {
                                                       RadioButton rb = (RadioButton) findViewById(checkedId);
                                                       if (rb.getText().toString().equals("Paybill Number")) {
                                                           type = "  Paybill Number  ";
-                                                          Log.e("Paybill","bills");
+                                                          Log.e("Paybill", "bills");
                                                       } else {
                                                           type = "Buy Goods/Services";
-                                                          Log.e("Buy Gooods","goods");
+                                                          Log.e("Buy Gooods", "goods");
                                                       }
 
                                                   }
@@ -148,14 +150,14 @@ public class SavePaybill extends AppCompatActivity {
             public void onClick(View v) {
                 save();
                 if (MyShortcuts.hasInternetConnected(getBaseContext())) {
-                    if (imagetrue) {
+                    /*if (imagetrue) {
                         if (videotrue) {
 //                            uploadVideo();
-                        }
-                        uploadImage();
-                    } else {
+                        }*/
+                    uploadImage();
+                   /* } else {
                         MyShortcuts.showToast("Please upload a photo!", getBaseContext());
-                    }
+                    }*/
 
 
                 }
@@ -229,13 +231,13 @@ public class SavePaybill extends AppCompatActivity {
             etName.setError(null);
         }
 
-        if (descriptiondetail.isEmpty()) {
+       /* if (descriptiondetail.isEmpty()) {
             description.setError("Enter short description");
             valid = false;
         } else {
             description.setError(null);
         }
-
+*/
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("enter a valid email");
             valid = false;
@@ -278,12 +280,22 @@ public class SavePaybill extends AppCompatActivity {
                 }
             };*/
 
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    MyShortcuts.showToast("Please Add a photo", getBaseContext());
-                }
-            });
+//            tru = true;
+
+//            if (tru) {
+                Runnable runable;
+                new Handler(Looper.getMainLooper()).post(
+                        runable =new Runnable() {
+                    @Override
+                    public void run() {
+                        MyShortcuts.showToast("Uploading without a photo", getBaseContext());
+                        UploadPaybill();
+//                        tru=false;
+
+                    }
+                });
+
+//            }
 
 //            MyShortcuts.showToast("Please Add a photo", getBaseContext());
         }
@@ -319,7 +331,7 @@ public class SavePaybill extends AppCompatActivity {
                         }
                         //Showing toast
 //                        Toast.makeText(SavePaybill.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.e("error response", volleyError.getMessage()+"");
+                        Log.e("error response", volleyError.getMessage() + "");
                     }
                 }) {
             @Override
@@ -469,7 +481,6 @@ public class SavePaybill extends AppCompatActivity {
     }
 
 
-
     private void dismissProgressDialog() {
         if (uploading != null && uploading.isShowing()) {
             uploading.dismiss();
@@ -488,7 +499,7 @@ public class SavePaybill extends AppCompatActivity {
 
     @Override
     public void onPause() {
-       dismissProgressDialog();
+        dismissProgressDialog();
         super.onPause();
     }
 
@@ -526,6 +537,11 @@ public class SavePaybill extends AppCompatActivity {
             case R.id.adhome:
                 Intent intent3 = new Intent(getBaseContext(), SaveHomeAd.class);
                 startActivity(intent3);
+
+                return true;
+            case R.id.adnotice:
+                Intent intent4 = new Intent(getBaseContext(), UploadNoticeBoard.class);
+                startActivity(intent4);
 
                 return true;
 
@@ -591,8 +607,80 @@ public class SavePaybill extends AppCompatActivity {
 
     }
 
-/*
-    compile 'com.daimajia.slider:library:1.1.5@aar'
-    compile 'com.daimajia.androidanimations:library:1.0.3@aar'*/
+    /*
+        compile 'com.daimajia.slider:library:1.1.5@aar'
+        compile 'com.daimajia.androidanimations:library:1.0.3@aar'*/
+    private void UploadPaybill() {
+        loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL_P,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //Disimissing the progress dialog
+                        if (loading != null) {
+                            loading.dismiss();
+                        }
+                        Log.e("response", s);
+                      /*  Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(intent);*/
+                        finish();
+                        //Showing toast message of the response
+//                        Toast.makeText(SavePaybill.this, s, Toast.LENGTH_LONG).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        if (loading != null) {
+                            loading.dismiss();
+                        }
+                        //Showing toast
+//                        Toast.makeText(SavePaybill.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("error response", volleyError.getMessage() + "");
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+//                String image = getStringImage(bitmap);
+
+                //Getting Image Name
+                String uname = editTextName.getText().toString().trim();
+                String email = etEmail.getText().toString();
+                String paybillno = etPaybill.getText().toString();
+                String pname = etName.getText().toString();
+                String shortD = description.getText().toString();
+
+                //Creating parameters
+                Map<String, String> params = new Hashtable<String, String>();
+
+
+//                TODO uname(image_name) is the description and I should add video field in the paybill database field
+                //Adding parameters
+
+                params.put("name", pname);
+                params.put("email", email);
+                params.put("paybill_number", paybillno);
+                params.put("video", name);
+                params.put("description", shortD);
+                params.put("history", "false");
+                params.put("sent", "false");
+                params.put("type", type);
+
+
+//                Log.e("params",params.toString());
+                //returning parameters
+                return params;
+            }
+        };
+
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
 
 }

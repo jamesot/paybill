@@ -111,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         url_maps.put("1", MyShortcuts.baseURL()+"images/advertis.jpg");
         url_maps.put("2", MyShortcuts.baseURL()+"images/advertis1.jpg");
         url_maps.put("3", MyShortcuts.baseURL()+"images/advertis2.jpg");
+        url_maps.put("4", MyShortcuts.baseURL()+"images/advertis3.jpg");
+        url_maps.put("5", MyShortcuts.baseURL()+"images/advertis4.jpg");
+        url_maps.put("6", MyShortcuts.baseURL()+"images/advertis5.jpg");
 
        /* HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("advertisement 1 ", R.drawable.five);
@@ -735,6 +738,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+  /*  Popularizing app to areas in Nairobi with least users
+Continued monitoring of data collected/users*/
+
+
     private void getPaybill() {
 
         Post.getData(MyShortcuts.baseURL() + "fetchPaybill.php", new Response.Listener<String>() {
@@ -1102,7 +1109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     stringList.add(suggestion);*/
 
                 } while (cursor.moveToNext());
-                Log.e("StringList of names", stringList.toString() + stringList.size());
+//                Log.e("StringList of names", stringList.toString() + stringList.size());
 
            //TODO image ad search
                 if (MyShortcuts.hasInternetConnected(getBaseContext())) {
@@ -1115,8 +1122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     card.secondaryTitle = "";
                     card.setTitle("");
                     thumb.setUrlResource(path);
-                    Log.e("path", path);
-                    thumb.setErrorResource(R.drawable.heart_off);
+//                    Log.e("path", path);
+//                    thumb.setErrorResource(R.drawable.heart_off);
                     card.addCardThumbnail(thumb);
                     card.init();
                     SearchCards.add(card);
@@ -1404,7 +1411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             JSONObject jObj = query;
             JSONArray res = jObj.getJSONArray("All");
-            Log.e("result: ", res.toString());
+//            Log.e("result: ", res.toString());
 
             // looping through All res
             for (int i = 0; i < res.length(); i++) {
@@ -1467,7 +1474,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             JSONObject jObj = query;
             JSONArray res = jObj.getJSONArray("All");
-            Log.e("result: ", res.toString());
+//            Log.e("result: ", res.toString());
 
             // looping through All res
             for (int i = 0; i < res.length(); i++) {
@@ -1529,7 +1536,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 String success = null;
                 try {
-                    Log.e("result string", response);
+//                    Log.e("result string", response);
                     JSONObject jObj = new JSONObject(response);
 //                            res = jObj.getJSONArray("All");
                     //successfully gotten matatu data
@@ -1546,7 +1553,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.e("truncating the paybill","truncated");
                     }
 
-                    Log.e("result: ", res.toString());
+//                    Log.e("result: ", res.toString());
 
 
                     // looping through All res
@@ -1572,7 +1579,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ;
 
                         if (verifyFavourite("paybill", name)) {
-                            Log.e("new paybill", "new paybill");
+//                            Log.e("new paybill", "new paybill");
                             Paybill paybill = new Paybill();
                             paybill.setName(name);
                             paybill.setEmail(c.getString("email"));

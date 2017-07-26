@@ -76,6 +76,9 @@ public class Favorites extends AppCompatActivity implements NavigationView.OnNav
         url_maps.put("1", MyShortcuts.baseURL()+"images/advertis.jpg");
         url_maps.put("2", MyShortcuts.baseURL()+"images/advertis1.jpg");
         url_maps.put("3", MyShortcuts.baseURL()+"images/advertis2.jpg");
+        url_maps.put("4", MyShortcuts.baseURL()+"images/advertis3.jpg");
+        url_maps.put("5", MyShortcuts.baseURL()+"images/advertis4.jpg");
+        url_maps.put("6", MyShortcuts.baseURL()+"images/advertis5.jpg");
 
        /* HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("advertisement 1 ", R.drawable.five);

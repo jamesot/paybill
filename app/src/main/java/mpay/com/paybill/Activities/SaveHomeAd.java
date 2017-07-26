@@ -65,9 +65,9 @@ public class SaveHomeAd extends AppCompatActivity {
 
     private String selectedPath;
     static String name = "";
-    private Button buttonChoose, buttonChoose1, buttonChoose2;
+    private Button buttonChoose, buttonChoose1, buttonChoose2, buttonChoose3, buttonChoose4, buttonChoose5;
     private static Bitmap bitmap;
-    static boolean imagetrue = false, imagetrue1 = false, imagetrue2 = false, imagetrue3 = false, videotrue = false;
+    static boolean imagetrue = false, imagetrue1 = false, imagetrue2 = false, imagetrue3 = false,imagetrue4 = false,imagetrue5 = false, imagetrue6 = false, videotrue = false;
     private int PICK_IMAGE_REQUEST = 1;
 
     private String UPLOAD_URL = MyShortcuts.baseURL() + "uploadAd.php";
@@ -117,12 +117,46 @@ public class SaveHomeAd extends AppCompatActivity {
             }
         });
 
+        buttonChoose3 = (Button) findViewById(R.id.buttonChoose4);
+        buttonChoose3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagetrue4 = true;
+                showFileChooser();
+
+
+            }
+        });
+        buttonChoose4 = (Button) findViewById(R.id.buttonChoose5);
+        buttonChoose4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagetrue5 = true;
+                showFileChooser();
+
+
+            }
+        });
+        buttonChoose5 = (Button) findViewById(R.id.buttonChoose6);
+        buttonChoose5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagetrue6 = true;
+                showFileChooser();
+
+
+            }
+        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 save();
                 if (MyShortcuts.hasInternetConnected(getBaseContext())) {
-                    if (imagetrue1 && imagetrue2 && imagetrue3) {
+
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                   /* if (imagetrue1 && imagetrue2 && imagetrue3&& imagetrue4&& imagetrue5&& imagetrue6) {
                         MyShortcuts.showToast("Uploaded successfully!", getBaseContext());
 
                         if (videotrue) {
@@ -131,7 +165,7 @@ public class SaveHomeAd extends AppCompatActivity {
 //                        uploadImage();
                     } else {
                         MyShortcuts.showToast("Please upload all photos!", getBaseContext());
-                    }
+                    }*/
 
 
                 }
@@ -298,6 +332,12 @@ public class SaveHomeAd extends AppCompatActivity {
 
     private void uploadEachImage(final String name) {
         Log.e("name verified", name);
+        imagetrue1=false;
+        imagetrue2=false;
+        imagetrue3=false;
+        imagetrue4=false;
+        imagetrue5=false;
+        imagetrue6=false;
         //Showing the progress dialog
         loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
@@ -313,11 +353,10 @@ public class SaveHomeAd extends AppCompatActivity {
 
 
 
-                        if (imagetrue1 && imagetrue2 && imagetrue3) {
+//                        if (imagetrue1 && imagetrue2 && imagetrue3&& imagetrue4&& imagetrue5&& imagetrue6) {
 
-                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                            startActivity(intent);
-                        }
+
+//                        }
                         //Showing toast message of the response
 //                        Toast.makeText(SavePaybill.this, s, Toast.LENGTH_LONG).show();
 
@@ -399,6 +438,12 @@ public class SaveHomeAd extends AppCompatActivity {
                     uploadEachImage("advertis1");
                 } else if (imagetrue3) {
                     uploadEachImage("advertis2");
+                } else if (imagetrue4) {
+                    uploadEachImage("advertis3");
+                } else if (imagetrue5) {
+                    uploadEachImage("advertis4");
+                } else if (imagetrue6) {
+                    uploadEachImage("advertis5");
                 }
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 Log.e("image chosen", bitmap.toString());

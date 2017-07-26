@@ -78,6 +78,52 @@
                 android:textColor="@color/colorAccent"
                 android:visibility="invisible" />
 
+            <Button
+                android:id="@+id/buttonChoose4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Home Advertisement Image"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/imageChosen4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo selected"
+                android:textColor="@color/colorAccent"
+                android:visibility="invisible" />
+            <Button
+                android:id="@+id/buttonChoose5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Home Advertisement Image"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/imageChosen5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo selected"
+                android:textColor="@color/colorAccent"
+                android:visibility="invisible" />
+            <Button
+                android:id="@+id/buttonChoose6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Home Advertisement Image"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/imageChosen6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo selected"
+                android:textColor="@color/colorAccent"
+                android:visibility="invisible" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

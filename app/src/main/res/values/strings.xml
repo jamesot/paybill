@@ -14,4 +14,5 @@
     <string name="banner_ad_unit_id">ca-app-pub-2431263302089833/8641294905</string>
     <string name="title_activity_delete">Edit Pay bills</string>
     <string name="title_activity_contact_us">Contact Us</string>
+    <string name="title_activity_notice_board">NoticeBoard</string>
 </resources>
